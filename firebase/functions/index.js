@@ -13,8 +13,8 @@ const principles = [];
 const allrecords = [];
 
 //AirTable Setup...
-const airtableApiKey = "keysFT4B8Ax7cKoTN";   //NOTE: This would/should go into a secrets/param store of some kind.
-const airtableBaseID = "appVyprZL80uhj6CK";   //NOTE: This would/should go into a secrets/param store of some kind.
+const airtableApiKey = "keysABC123EnterYourOwnKey"; //NOTE: This would/should go into a secrets/param store of some kind.
+const airtableBaseID = "appABC123EnterYourOwnID";   //NOTE: This would/should go into a secrets/param store of some kind.
 const Airtable = require('airtable');
 const base = new Airtable({
   endpointUrl: 'https://api.airtable.com', 
@@ -93,9 +93,9 @@ function getNuggetByTypeInner(type) {
 
 //Function to clear our local data...
 function clearDataArrays() {
-  quotes = [];
-  principles = [];
-  allrecords = [];
+  quotes.length = 0;
+  principles.length = 0;
+  allrecords.length = 0;
 }
 
 //Gets a single nugget from the provided array...
@@ -133,7 +133,7 @@ exports.dialogflowFirebaseFulfillment = functions.https.onRequest((request, resp
   // Uncomment and edit to make your own intent handler
   // uncomment `intentMap.set('your intent name here', yourFunctionHandler);`
   // below to get this function to be run when a Dialogflow intent is matched
-  function GetNuggetByTypeActionHandler(agent) {
+  function GetNuggetByTypeHandler(agent) {
     let response = DEFAULTRESPONSE;
     let nugget;
     if(agent && agent.parameters && agent.parameters.NuggetType) {
@@ -160,7 +160,7 @@ exports.dialogflowFirebaseFulfillment = functions.https.onRequest((request, resp
   let intentMap = new Map();
   intentMap.set('Default Welcome Intent', welcome);
   intentMap.set('Default Fallback Intent', fallback);
-  intentMap.set('GetNuggetByTypeAction', GetNuggetByTypeActionHandler);
+  intentMap.set('GetNuggetByType', GetNuggetByTypeHandler);
   // intentMap.set('GetNuggetByTypeAction', GetNuggetByTypeActionHandlerGoogleAssistant);
   agent.handleRequest(intentMap);
 });
