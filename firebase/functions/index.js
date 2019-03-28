@@ -6,8 +6,13 @@ var principles = [];
 var allrecords = [];
 
 //AirTable Setup...
-var Airtable = require('airtable');
-var base = new Airtable({endpointUrl: 'https://api.airtable.com', apiKey: 'keysFT4B8Ax7cKoTN'}).base('appVyprZL80uhj6CK');
+const airtableApiKey = "keysABC123EnterYourOwnKey"; //NOTE: This would/should go into a secrets/param store of some kind.
+const airtableBaseID = "appABC123EnterYourOwnID";   //NOTE: This would/should go into a secrets/param store of some kind.
+const Airtable = require('airtable');
+const base = new Airtable({
+  endpointUrl: 'https://api.airtable.com', 
+  apiKey: airtableApiKey
+}).base(airtableBaseID);
 
 //Function to conditionally find our nugget either using local data or by querying AirTable...
 function getNuggetByType(type) {
